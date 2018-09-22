@@ -53,3 +53,7 @@ jc() {
     fi
 }
 
+jclean() {
+    python3 $HOME/.autojump/autojump.py --clean
+}
+
