@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# write by darcy.wu
 
 __version__ = 0.1
 __all__ = ["jump"]
@@ -109,9 +110,11 @@ def read_record(filename):
 
 def read_input(filename):
     stream = open(filename, "r")
+    i = 0
     for line in stream:
+        i += 1
         (count, line) = get_path(line)
-        yield ansi.remove_escapes(line.rstrip("\r\n"))
+        yield ansi.remove_escapes("%03d -> %s" % (i, line.rstrip("\r\n")))
     stream.close()
 
 def get_path(line):
@@ -179,7 +182,7 @@ def main():
             sys.exit(1)
 
         #select = cli_query(options.query, candidates)[0]
-        select = cli_query(' '.join(args), candidates)[0]
+        select = cli_query(' '.join(args), candidates)[0].split(' -> ')[1]
         path_record = read_record(filename)
         path_record[select] += 1
         write_back(filename, path_record)
