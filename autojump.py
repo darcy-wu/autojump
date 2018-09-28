@@ -10,7 +10,7 @@ import re
 import locale
 
 import logging
-from colorlog import ColoredFormatter
+#from colorlog import ColoredFormatter
 
 from optparse import OptionParser
 import percol
@@ -30,10 +30,10 @@ def get_selected_string(lines, percol):
 
 log_level = logging.DEBUG
 logging.root.setLevel(log_level)
-formatter = ColoredFormatter('[%(log_color)s%(levelname)s%(reset)s] %(log_color)s%(message)s%(reset)s')
+#formatter = ColoredFormatter('[%(log_color)s%(levelname)s%(reset)s] %(log_color)s%(message)s%(reset)s')
 stream = logging.StreamHandler()
 stream.setLevel(log_level)
-stream.setFormatter(formatter)
+#stream.setFormatter(formatter)
 
 logger = logging.getLogger('autojump')
 logger.setLevel(log_level)
