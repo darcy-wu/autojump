@@ -136,7 +136,7 @@ def main():
     setup_options(parser)
     options, args = parser.parse_args()
 
-    if not os.path.exists(os.environ['HOME'] + '/.autojump'):
+    if not os.path.exists(os.environ['HOME'] + '/.autojump/jump.list'):
         os.system('mkdir ~/.autojump -p; touch ~/.autojump/jump.list')
 
     jumplist = os.environ['HOME'] + '/.autojump/jump.list'
