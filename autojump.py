@@ -162,12 +162,13 @@ def main():
         newlines = []
         for l in lines:
             (count, path) = get_path(l)
-            if os.path.exists(l) and count > 1:
-                newlines.append(str(count) + ' ' + l)
+            if os.path.exists(path) and count >= 1:
+                #newlines.append(str(count) + ' ' + path)
+                newlines.append(l)
         with open(jumplist, 'w') as fd:
             fd.writelines(newlines)
             fd.close()
-        logger.info('clean path: %d/%d' % (len(newlines), len(lines)))
+        logger.info('total path: %d. clean path: %d' % (len(lines), len(lines) - len(newlines)))
     else:
         filename = jumplist
 
@@ -182,11 +183,15 @@ def main():
             sys.exit(1)
 
         #select = cli_query(options.query, candidates)[0]
-        select = cli_query(' '.join(args), candidates)[0].split(' -> ')[1]
-        path_record = read_record(filename)
-        path_record[select] += 1
-        write_back(filename, path_record)
-        sys.stdout.write(select)
+        t = cli_query(' '.join(args), candidates)[0]
+        if t:
+            select = t.split(' -> ')[1]
+            path_record = read_record(filename)
+            path_record[select] += 1
+            write_back(filename, path_record)
+            sys.stdout.write(select)
+        else:
+            sys.stdout.write(os.getcwd())
 
 
 if __name__ == '__main__':
